@@ -22,7 +22,7 @@ export default function portfolio() {
       </span>
 
       <p className="flex items-center justify-center mt-12 font-semibold cursor-pointer">
-        <Link href={"/"} rel="rofererrel">
+        <Link href={"/"} rel="noreferrer">
           <span className="bg-zinc-800 p-4 px-8 rounded-full hover:bg-neutral-300 hover:text-zinc-800 transition-colors duration-200 ease-in-out hover:scale-105">
             Home
           </span>
