@@ -15,7 +15,7 @@ body {
   transition: opacity 0.2s, transform 0.1s;
 }
 
-@media only screen and (max-width: 768px) {
+@media only screen and (max-width: 1024px) {
   #ball-canvas {
     display: none !important;
   }

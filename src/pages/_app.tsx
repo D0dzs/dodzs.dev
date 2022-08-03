@@ -12,6 +12,7 @@ function MyApp({ Component, pageProps, router }: AppProps) {
         stopDelayMs={200}
         height={3}
         showOnShallow={true}
+        options={{ showSpinner: false }}
       />
       <AnimatePresence exitBeforeEnter>
         <Component {...pageProps} key={router.route} />

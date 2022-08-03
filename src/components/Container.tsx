@@ -5,6 +5,8 @@ import React, { useEffect, useRef } from "react";
 import { config } from "../../config";
 import { motion } from "framer-motion";
 import { loadCursor } from "../utils/loadCursor";
+import Navbar from "./Navbar";
+import Footer from "./Footer";
 
 export default function Container(props: any) {
   const { children } = props;
@@ -65,6 +67,7 @@ export default function Container(props: any) {
           className="ball-transitions pointer-events-none fixed z-30 h-6 w-6 rounded-full border border-black bg-transparent opacity-0 shadow-md duration-200 dark:border-white"
         />
       </div>
+      <Navbar />
       <main className="flex min-h-screen flex-col antialiased dark:bg-zinc-700 dark:text-white">
         {config.smoothTransition ? (
           <motion.div {...variants}>{children}</motion.div>
@@ -72,6 +75,7 @@ export default function Container(props: any) {
           children
         )}
       </main>
+      <Footer />
     </>
   );
 }

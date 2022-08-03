@@ -16,7 +16,7 @@ const Home: NextPage = () => {
           Current path:{" "}
           <span className="font-semibold">
             {router.asPath == "/"
-              ? "Home"
+              ? "home"
               : router.asPath.trim().replace("/", "")}
           </span>
         </sub>
