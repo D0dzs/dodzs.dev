@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 import React from "react";
 import Container from "../components/Container";
 
-export default function portfolio() {
+export default function Portfolio() {
   const router = useRouter();
   return (
     <Container>
