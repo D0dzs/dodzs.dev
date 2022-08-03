@@ -1,0 +1,22 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html,
+body {
+  @apply box-border;
+  scroll-behavior: smooth;
+  scrollbar-color: rgb(121, 121, 121) rgb(61, 61, 61);
+  scrollbar-width: thin;
+  scroll-padding: 5rem;
+}
+
+.ball-transitions {
+  transition: opacity 0.2s, transform 0.1s;
+}
+
+@media only screen and (max-width: 768px) {
+  #ball-canvas {
+    display: none !important;
+  }
+}
