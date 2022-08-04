@@ -13,6 +13,7 @@ export default function Container(props: any) {
   const router = useRouter();
   const reduceMotion = useReducedMotion();
 
+  const formattedURL = router.asPath.trim().replace("/", "");
   const variants = {
     initial: {
       scale: reduceMotion ? 1 : 0.96,
@@ -59,6 +60,18 @@ export default function Container(props: any) {
         <meta property="og:description" content={config.description} />
         <meta property="og:title" content={config.title} />
         <meta property="og:url" content={config.url + router.asPath} />
+        <title>
+          {config.url} |{" "}
+          {router.asPath == "/"
+            ? "Home"
+            : router.asPath
+                .trim()
+                .replace("/", "")
+                .replace(
+                  formattedURL.charAt(0),
+                  formattedURL.charAt(0).toUpperCase()
+                )}
+        </title>
       </Head>
       <div className="stuff(s)-that-useless-but-fancy-\:D">
         <div
