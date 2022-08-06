@@ -24,7 +24,7 @@ export default function Discord() {
               : router.asPath.trim().replace("/", "")}
           </span>
         </p>
-        <section className="flex flex-col gap-8 select-none m-8 md:flex-row flex-wrap md:w-[1120px] flex-auto">
+        <section className="flex flex-col gap-8 select-none m-8 md:flex-row flex-wrap md:w-[1120px] flex-auto justify-center">
           {data?.activities.map((val, index) => {
             if (val?.assets?.large_text.match("PreMiD")) {
               return (
