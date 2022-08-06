@@ -24,9 +24,41 @@ export default function Discord() {
               : router.asPath.trim().replace("/", "")}
           </span>
         </p>
-        <section className="flex flex-col gap-8 select-none m-8 md:flex-row md:flex-grow">
+        <section className="flex flex-col gap-8 select-none m-8 md:flex-row flex-wrap md:w-[1120px] flex-auto">
           {data?.activities.map((val, index) => {
-            if (val?.assets?.large_text.match("PreMiD")) return;
+            if (val?.assets?.large_text.match("PreMiD")) {
+              return (
+                <div className={boxStyle} key={index}>
+                  <div>
+                    <img
+                      src={`https://cdn.discordapp.com/app-assets/${val?.application_id}/${val?.assets?.large_image}.png`}
+                      className="rounded-md"
+                      width={76}
+                      height={76}
+                    />
+                  </div>
+                  <div className="flex flex-col items-start justify-center ml-4">
+                    <a
+                      href={`https://www.twitch.tv/${val?.state.toLocaleLowerCase()}`}
+                      target={"_blank"}
+                      rel="noreferrer"
+                      className="hover:text-[#9b65ff] transition-all duration-150 ease-in"
+                    >
+                      <p className="font-semibold self-left flex">
+                        {val?.name}{" "}
+                        <span>
+                          <CgExternal size={24} />
+                        </span>
+                      </p>
+                    </a>
+                    <p className="text-[0.9rem] hidden md:block">
+                      {val?.details}
+                    </p>
+                    <p className="text-[0.9rem]">{val?.state}</p>
+                  </div>
+                </div>
+              );
+            }
 
             if (val?.name.toLocaleLowerCase() === "spotify") {
               return (
