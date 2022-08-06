@@ -4,7 +4,7 @@ import { useRouter } from "next/router";
 import React, { useEffect, useRef } from "react";
 import { config } from "../../config";
 import { motion } from "framer-motion";
-import { loadCursor } from "../utils/loadCursor";
+// import { loadCursor } from "../utils/loadCursor";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
 
@@ -37,11 +37,11 @@ export default function Container(props: any) {
     },
   };
 
-  const ballCanvas = useRef<HTMLDivElement>(null);
-  useEffect(() => {
-    if (typeof window === "undefined" || !ballCanvas.current) return;
-    return loadCursor(ballCanvas.current);
-  }, []);
+  //   const ballCanvas = useRef<HTMLDivElement>(null);
+  //   useEffect(() => {
+  //     if (typeof window === "undefined" || !ballCanvas.current) return;
+  //     return loadCursor(ballCanvas.current);
+  //   }, []);
 
   return (
     <>
@@ -64,24 +64,21 @@ export default function Container(props: any) {
           {config.url} |{" "}
           {router.asPath == "/"
             ? "Home"
-            : router.asPath
-                .trim()
-                .replace("/", "")
-                .replace(
-                  formattedURL.charAt(0),
-                  formattedURL.charAt(0).toUpperCase()
-                )}
+            : formattedURL.replace(
+                formattedURL.charAt(0),
+                formattedURL.charAt(0).toUpperCase()
+              )}
         </title>
       </Head>
-      <div className="stuff(s)-that-useless-but-fancy-\:D">
-        <div
-          id="ball-canvas"
-          ref={ballCanvas}
-          className="ball-transitions pointer-events-none fixed z-30 h-6 w-6 rounded-full border border-black bg-transparent opacity-0 shadow-md duration-200 dark:border-white"
-        />
-      </div>
       <Navbar />
-      <main className="flex min-h-screen flex-col antialiased dark:bg-zinc-700 dark:text-white">
+      <main className="flex min-h-screen flex-col antialiased bg-gradient-to-t from-zinc-800 via-zinc-700 to-zinc-800 dark:text-white">
+        <div className="stuff(s)-that-useless-but-fancy-\:D SoonTM hidden">
+          {/* <div
+            id="ball-canvas"
+            ref={ballCanvas}
+            className="ball-transitions pointer-events-none fixed z-30 h-6 w-6 rounded-full border border-black bg-transparent opacity-0 shadow-md duration-200 dark:border-white"
+          /> */}
+        </div>
         {config.smoothTransition ? (
           <motion.div {...variants}>{children}</motion.div>
         ) : (
