@@ -24,7 +24,7 @@ export default function Discord() {
           {data?.activities.length == 0 ? (
             <div className="font-mono text-xl text-center text-gray-300">
               Sajnos{" "}
-              <span className="bg-gradient-to-r from-orange-400 to-red-400 text-transparent bg-clip-text min-w-min font-extrabold">
+              <span className="bg-gradient-to-r from-orange-400 to-red-500 text-transparent bg-clip-text min-w-min font-extrabold">
                 {data?.discord_user.username}
               </span>{" "}
               jelenleg nem játszik semmivel :(

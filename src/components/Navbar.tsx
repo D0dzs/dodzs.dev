@@ -39,7 +39,7 @@ export default function Navbar() {
     <header className="p-4 bg-black text-white transition-all duration-200 ease-in-out shadow-navbar">
       <div className="flex justify-between items-center">
         {/* Navbar Title */}
-        <div className="bg-gradient-to-tr from-[#14e81e] via-[#00ea8d] to-[#017ed5] bg-clip-text text-transparent w-min font-bold text-2xl">
+        <div className="bg-gradient-to-r from-orange-400 to-red-500 bg-clip-text text-transparent w-min font-bold text-2xl">
           Dodzs.dev
         </div>
         <nav
