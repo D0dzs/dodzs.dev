@@ -71,7 +71,7 @@ export default function Container(props: any) {
         </title>
       </Head>
       <Navbar />
-      <main className="flex min-h-screen flex-col antialiased bg-gradient-to-t from-zinc-800 via-zinc-700 to-zinc-800 dark:text-white bg-fixed">
+      <main className="flex min-h-screen flex-col antialiased bg-global dark:text-white bg-fixed bg-left md:bg-center">
         <div className="stuff(s)-that-useless-but-fancy-\:D SoonTM hidden">
           {/* <div
             id="ball-canvas"

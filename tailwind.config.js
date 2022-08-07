@@ -6,6 +6,9 @@ module.exports = {
     extend: {
         boxShadow: {
             'navbar': '0px 8px 16px 4px rgba(0,0,0,0.75)',
+        },
+        backgroundImage: {
+            'global': 'url(/bg-global.webp)'
         }
     },
   },

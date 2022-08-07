@@ -1,21 +1,24 @@
-import { useRouter } from "next/router";
 import React from "react";
 import Container from "../components/Container";
-import discordData from "../utils/discordData";
 import { CgExternal } from "react-icons/cg";
+import { useLanyardWs } from "use-lanyard";
 
 export default function Discord() {
-  const router = useRouter();
-  const data = discordData("401390393746259978");
+  const data = useLanyardWs("401390393746259978");
   const boxStyle =
-    "flex flex-row bg-zinc-600 shadow-xl p-2 rounded-xl w-96 min-w-0";
+    "flex flex-row bg-white/5 backdrop-blur-sm shadow-xl p-2 rounded-xl w-96 min-w-0";
+  const imgWH = 76;
 
   return (
     <Container>
       <div className="flex flex-col items-center justify-center gap-4">
         <h1 className="my-8 font-semibold text-3xl font-mono text-[#7c85e9] flex flex-col">
           <span className="first-letter:text-[#5865F2]">Discord Presences</span>
-          <span className="text-sm text-white self-center min-w-0">
+          <span
+            className={`text-sm text-gray-300 self-center min-w-0 ${
+              data?.activities.length == 0 ? "hidden" : "block"
+            }`}
+          >
             Aktív:{" "}
             {data?.activities.length == 0 ? "N/A" : data?.activities.length}
           </span>
@@ -34,7 +37,8 @@ export default function Discord() {
           {data?.activities.map((val, index) => {
             if (val?.assets?.large_text.match("PreMiD")) {
               let srcURL = val?.assets?.large_image;
-              let httpsURL = srcURL.startsWith("mp:external") ? true : false;
+              let httpsURL = srcURL.startsWith("mp:external/") ? true : false;
+
               if (httpsURL) {
                 srcURL = srcURL.replace(
                   /.*mp:external/g,
@@ -44,14 +48,49 @@ export default function Discord() {
                 srcURL = `https://cdn.discordapp.com/app-assets/${val?.application_id}/${val?.assets.large_image}.png`;
               }
 
+              if (val?.name.match("Twitch")) {
+                return (
+                  <div className={boxStyle} key={index}>
+                    <div className="self-center">
+                      <img
+                        src={srcURL}
+                        className="rounded-md"
+                        width={imgWH}
+                        height={imgWH}
+                        alt={val?.name}
+                      />
+                    </div>
+                    <div className="flex flex-col items-start justify-center ml-4 min-w-0">
+                      <a
+                        href={`https://twitch.tv/${val?.state}`}
+                        target={"_blank"}
+                        rel="noreferrer"
+                        className="text-[#9971e4] md:hover:text-[#815fc0] md:text-white transition-all duration-150 ease-in"
+                      >
+                        <p className="font-semibold self-left flex">
+                          {val?.name}{" "}
+                          <span>
+                            <CgExternal size={24} />
+                          </span>
+                        </p>
+                      </a>
+                      <p className="text-[0.9rem]">
+                        Watching: <strong>{val?.state}</strong>
+                      </p>
+                    </div>
+                  </div>
+                );
+              }
+
               return (
                 <div className={boxStyle} key={index}>
                   <div className="self-center">
                     <img
                       src={srcURL}
-                      className="rounded-md max-w-xs"
-                      width={76}
-                      height={76}
+                      className="rounded-md"
+                      width={imgWH}
+                      height={imgWH}
+                      alt={val?.name}
                     />
                   </div>
                   <div className="flex flex-col items-start justify-center ml-4">
@@ -63,15 +102,16 @@ export default function Discord() {
               );
             }
 
-            if (val?.name.toLocaleLowerCase() === "spotify") {
+            if (val?.name.match("Spotify")) {
               return (
                 <div className={boxStyle} key={index}>
                   <div className="self-center">
                     <img
                       src={`${data?.spotify?.album_art_url}`}
                       className="rounded-md"
-                      width={76}
-                      height={76}
+                      width={imgWH}
+                      height={imgWH}
+                      alt={val?.name}
                     />
                   </div>
                   <div className="flex flex-col items-start justify-center ml-4 min-w-0">
@@ -95,15 +135,16 @@ export default function Discord() {
               );
             }
 
-            if (val?.name.toLocaleLowerCase() === "skyblock") {
+            if (val?.name.match("Skyblock")) {
               return (
                 <div className={boxStyle} key={index}>
                   <div className="self-center">
                     <img
                       src={`https://cdn.discordapp.com/app-assets/${val?.application_id}/${val?.assets?.large_image}.png`}
-                      className="rounded-md max-w-xs"
-                      width={76}
-                      height={76}
+                      className="rounded-md"
+                      width={imgWH}
+                      height={imgWH}
+                      alt={val?.name}
                     />
                   </div>
                   <div className="flex flex-col items-start justify-center ml-4">
@@ -123,9 +164,10 @@ export default function Discord() {
                       /.*https/g,
                       "https:/"
                     )}`}
-                    className="rounded-md max-w-xs"
-                    width={76}
-                    height={76}
+                    className="rounded-md"
+                    width={imgWH}
+                    height={imgWH}
+                    alt={val?.name}
                   />
                 </div>
                 <div className="flex flex-col items-start justify-center ml-4">
