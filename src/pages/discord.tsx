@@ -23,7 +23,7 @@ export default function Discord() {
             {data?.activities.length == 0 ? "N/A" : data?.activities.length}
           </span>
         </h1>
-        <section className="flex flex-col gap-8 select-none m-8 md:flex-row flex-wrap md:w-[1120px] flex-auto justify-center">
+        <section className="flex flex-col gap-8 select-none m-8 md:flex-row flex-wrap md:min-w-screen flex-auto justify-center lg:w-full">
           {data?.activities.length == 0 ? (
             <div className="font-mono text-xl text-center text-gray-300">
               Sajnos{" "}
