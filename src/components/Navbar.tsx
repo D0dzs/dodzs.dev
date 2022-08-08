@@ -40,7 +40,9 @@ export default function Navbar() {
       <div className="flex justify-between items-center">
         {/* Navbar Title */}
         <div className="bg-gradient-to-r from-orange-400 to-red-500 bg-clip-text text-transparent w-min font-bold text-2xl">
-          Dodzs.dev
+          <Link href={"/"} rel="noreferrer">
+            Dodzs.dev
+          </Link>
         </div>
         <nav
           ref={navRef}

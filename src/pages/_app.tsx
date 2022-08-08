@@ -7,7 +7,7 @@ function MyApp({ Component, pageProps, router }: AppProps) {
   return (
     <MotionConfig reducedMotion="user">
       <NextNProgress
-        color="#fff"
+        color="orange"
         startPosition={0.3}
         stopDelayMs={200}
         height={3}

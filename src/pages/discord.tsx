@@ -2,28 +2,39 @@ import React from "react";
 import Container from "../components/Container";
 import { CgExternal } from "react-icons/cg";
 import { useLanyardWs } from "use-lanyard";
+import { motion } from "framer-motion";
 
 export default function Discord() {
   const data = useLanyardWs("401390393746259978");
   const boxStyle =
     "flex flex-row bg-white/5 backdrop-blur-sm shadow-xl p-2 rounded-xl w-96 min-w-0";
   const imgWH = 76;
+  const duration = 0.3;
+  const childDelay = 0.1;
 
   return (
     <Container>
       <div className="flex flex-col items-center justify-center gap-4">
-        <h1 className="my-8 font-semibold text-3xl font-mono text-[#7c85e9] flex flex-col">
-          <span className="first-letter:text-[#5865F2]">Discord Presences</span>
-          <span
-            className={`text-sm text-gray-300 self-center min-w-0 ${
-              data?.activities.length == 0 ? "hidden" : "block"
-            }`}
-          >
-            Aktív:{" "}
-            {data?.activities.length == 0 ? "N/A" : data?.activities.length}
-          </span>
-        </h1>
-        <section className="flex flex-col gap-8 select-none m-8 md:flex-row flex-wrap md:min-w-screen flex-auto justify-center lg:w-full">
+        <motion.div
+          initial={{ opacity: 0, size: "0%" }}
+          animate={{ opacity: 1, size: "100%" }}
+          transition={{ ease: "anticipate", duration: 1 }}
+        >
+          <h1 className="my-8 font-semibold text-3xl font-mono text-[#7c85e9] flex flex-col">
+            <span className="first-letter:text-[#5865F2]">
+              Discord Presences
+            </span>
+            <span
+              className={`text-sm text-slate-400 self-center min-w-0 ${
+                data?.activities.length == 0 ? "hidden" : "block"
+              }`}
+            >
+              Aktív:{" "}
+              {data?.activities.length == 0 ? "N/A" : data?.activities.length}
+            </span>
+          </h1>
+        </motion.div>
+        <motion.section className="flex flex-col gap-8 select-none m-8 md:flex-row flex-wrap md:min-w-screen flex-auto justify-center lg:w-full">
           {data?.activities.length == 0 ? (
             <div className="font-mono text-xl text-center text-gray-300">
               Sajnos{" "}
@@ -50,7 +61,16 @@ export default function Discord() {
 
               if (val?.name.match("Twitch")) {
                 return (
-                  <div className={boxStyle} key={index}>
+                  <motion.div
+                    className={boxStyle}
+                    key={index}
+                    initial={{ opacity: 0, y: -20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{
+                      duration: duration,
+                      delay: index * childDelay,
+                    }}
+                  >
                     <div className="self-center">
                       <img
                         src={srcURL}
@@ -78,12 +98,18 @@ export default function Discord() {
                         Watching: <strong>{val?.state}</strong>
                       </p>
                     </div>
-                  </div>
+                  </motion.div>
                 );
               }
 
               return (
-                <div className={boxStyle} key={index}>
+                <motion.div
+                  className={boxStyle}
+                  key={index}
+                  initial={{ opacity: 0, y: -20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: duration, delay: index * childDelay }}
+                >
                   <div className="self-center">
                     <img
                       src={srcURL}
@@ -98,13 +124,19 @@ export default function Discord() {
                     <p className="text-[0.9rem]">{val?.details}</p>
                     <p className="text-[0.9rem]">{val?.state}</p>
                   </div>
-                </div>
+                </motion.div>
               );
             }
 
             if (val?.name.match("Spotify")) {
               return (
-                <div className={boxStyle} key={index}>
+                <motion.div
+                  className={boxStyle}
+                  key={index}
+                  initial={{ opacity: 0, y: -20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: duration, delay: index * childDelay }}
+                >
                   <div className="self-center">
                     <img
                       src={`${data?.spotify?.album_art_url}`}
@@ -131,7 +163,7 @@ export default function Discord() {
                     <p className="text-[0.9rem]">by {data?.spotify?.artist}</p>
                     <p className="text-[0.9rem]">on {data?.spotify?.album}</p>
                   </div>
-                </div>
+                </motion.div>
               );
             }
 
@@ -157,7 +189,13 @@ export default function Discord() {
             }
 
             return (
-              <div className={boxStyle} key={index}>
+              <motion.div
+                className={boxStyle}
+                key={index}
+                initial={{ opacity: 0, y: -20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: duration, delay: index * childDelay }}
+              >
                 <div className="self-center">
                   <img
                     src={`${val?.assets?.large_image.replace(
@@ -175,10 +213,10 @@ export default function Discord() {
                   <p className="text-[0.9rem]">{val?.details}</p>
                   <p className="text-[0.9rem]">{val?.state}</p>
                 </div>
-              </div>
+              </motion.div>
             );
           })}
-        </section>
+        </motion.section>
       </div>
     </Container>
   );
