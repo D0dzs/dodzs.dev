@@ -1,16 +1,23 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Container from "../components/Container";
 import { CgExternal } from "react-icons/cg";
 import { useLanyardWs } from "use-lanyard";
 import { motion } from "framer-motion";
 
 export default function Discord() {
+  const [time, setTime] = useState(new Date().getTime());
   const data = useLanyardWs("401390393746259978");
   const boxStyle =
-    "flex flex-row bg-white/5 backdrop-blur-sm shadow-xl p-2 rounded-xl w-96 min-w-0";
-  const imgWH = 76;
+    "flex flex-row bg-white/5 backdrop-blur-sm shadow-xl rounded-xl w-96 min-w-0 md:hover:bg-white/10 md:transition-all";
+  const imgWH = 100;
   const duration = 0.3;
   const childDelay = 0.1;
+
+  useEffect(() => {
+    setInterval(() => {
+      setTime(new Date().getTime());
+    }, 1000);
+  });
 
   return (
     <Container>
@@ -46,6 +53,20 @@ export default function Discord() {
           ) : null}
 
           {data?.activities.map((val, index) => {
+            const startTimestampGlobal = val?.timestamps?.start;
+            const hours =
+              new Date(time - startTimestampGlobal!).getUTCHours() == 0
+                ? null
+                : `${new Date(time - startTimestampGlobal!).getUTCHours()}:`;
+            const minutes =
+              new Date(time - startTimestampGlobal!).getUTCMinutes() > 9
+                ? `${new Date(time - startTimestampGlobal!).getUTCMinutes()}`
+                : `0${new Date(time - startTimestampGlobal!).getUTCMinutes()}`;
+            const seconds =
+              new Date(time - startTimestampGlobal!).getUTCSeconds() > 9
+                ? `${new Date(time - startTimestampGlobal!).getUTCSeconds()}`
+                : `0${new Date(time - startTimestampGlobal!).getUTCSeconds()}`;
+
             if (val?.assets?.large_text.match("PreMiD")) {
               let srcURL = val?.assets?.large_image;
               let httpsURL = srcURL.startsWith("mp:external/") ? true : false;
@@ -74,7 +95,7 @@ export default function Discord() {
                     <div className="self-center">
                       <img
                         src={srcURL}
-                        className="rounded-md"
+                        className="rounded-md h-full"
                         width={imgWH}
                         height={imgWH}
                         alt={val?.name}
@@ -97,6 +118,40 @@ export default function Discord() {
                       <p className="text-[0.9rem]">
                         Watching: <strong>{val?.state}</strong>
                       </p>
+                      <p className="text-xs">
+                        {hours}
+                        {minutes}:{seconds} elapsed
+                      </p>
+                    </div>
+                  </motion.div>
+                );
+              }
+
+              if (isNaN(val?.timestamps?.start!)) {
+                return (
+                  <motion.div
+                    className={boxStyle}
+                    key={index}
+                    initial={{ opacity: 0, y: -20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{
+                      duration: duration,
+                      delay: index * childDelay,
+                    }}
+                  >
+                    <div className="self-center">
+                      <img
+                        src={srcURL}
+                        className="rounded-md h-full"
+                        width={imgWH}
+                        height={imgWH}
+                        alt={val?.name}
+                      />
+                    </div>
+                    <div className="flex flex-col items-start justify-center ml-4">
+                      <p className="font-semibold self-left">{val?.name}</p>
+                      <p className="text-[0.9rem]">{val?.details}</p>
+                      <p className="text-[0.9rem]">{val?.state}</p>
                     </div>
                   </motion.div>
                 );
@@ -113,7 +168,7 @@ export default function Discord() {
                   <div className="self-center">
                     <img
                       src={srcURL}
-                      className="rounded-md"
+                      className="rounded-md h-full"
                       width={imgWH}
                       height={imgWH}
                       alt={val?.name}
@@ -123,12 +178,30 @@ export default function Discord() {
                     <p className="font-semibold self-left">{val?.name}</p>
                     <p className="text-[0.9rem]">{val?.details}</p>
                     <p className="text-[0.9rem]">{val?.state}</p>
+                    <p className="text-xs">
+                      {hours}
+                      {minutes}:{seconds} elapsed
+                    </p>
                   </div>
                 </motion.div>
               );
             }
 
             if (val?.name.match("Spotify")) {
+              const startTimestamp = data?.spotify?.timestamps.start;
+              const shours =
+                new Date(time - startTimestamp!).getUTCHours() == 0
+                  ? null
+                  : `${new Date(time - startTimestamp!).getUTCHours()}:`;
+              const sminutes =
+                new Date(time - startTimestamp!).getUTCMinutes() > 9
+                  ? `${new Date(time - startTimestamp!).getUTCMinutes()}`
+                  : `0${new Date(time - startTimestamp!).getUTCMinutes()}`;
+              const sseconds =
+                new Date(time - startTimestamp!).getUTCSeconds() > 9
+                  ? `${new Date(time - startTimestamp!).getUTCSeconds()}`
+                  : `0${new Date(time - startTimestamp!).getUTCSeconds()}`;
+
               return (
                 <motion.div
                   className={boxStyle}
@@ -140,7 +213,7 @@ export default function Discord() {
                   <div className="self-center">
                     <img
                       src={`${data?.spotify?.album_art_url}`}
-                      className="rounded-md"
+                      className="rounded-md h-full"
                       width={imgWH}
                       height={imgWH}
                       alt={val?.name}
@@ -162,6 +235,10 @@ export default function Discord() {
                     </a>
                     <p className="text-[0.9rem]">by {data?.spotify?.artist}</p>
                     <p className="text-[0.9rem]">on {data?.spotify?.album}</p>
+                    <p className="text-xs">
+                      {shours}
+                      {sminutes}:{sseconds} elapsed
+                    </p>
                   </div>
                 </motion.div>
               );
@@ -170,7 +247,7 @@ export default function Discord() {
             if (val?.name.match("Skyblock")) {
               return (
                 <div className={boxStyle} key={index}>
-                  <div className="self-center">
+                  <div className="self-center h-full">
                     <img
                       src={`https://cdn.discordapp.com/app-assets/${val?.application_id}/${val?.assets?.large_image}.png`}
                       className="rounded-md"
@@ -183,6 +260,10 @@ export default function Discord() {
                     <p className="font-semibold self-left">{val?.name}</p>
                     <p className="text-[0.9rem]">{val?.details}</p>
                     <p className="text-[0.9rem]">{val?.state}</p>
+                    <p className="text-xs">
+                      {hours}
+                      {minutes}:{seconds} elapsed
+                    </p>
                   </div>
                 </div>
               );
@@ -202,7 +283,7 @@ export default function Discord() {
                       /.*https/g,
                       "https:/"
                     )}`}
-                    className="rounded-md"
+                    className="rounded-md h-full"
                     width={imgWH}
                     height={imgWH}
                     alt={val?.name}
@@ -212,6 +293,10 @@ export default function Discord() {
                   <p className="font-semibold self-left">{val?.name}</p>
                   <p className="text-[0.9rem]">{val?.details}</p>
                   <p className="text-[0.9rem]">{val?.state}</p>
+                  <p className="text-xs">
+                    {isNaN(val?.timestamps?.start!) ? null : hours}
+                    {minutes}:{seconds} elapsed
+                  </p>
                 </div>
               </motion.div>
             );
