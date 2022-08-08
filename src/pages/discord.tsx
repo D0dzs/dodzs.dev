@@ -115,10 +115,10 @@ export default function Discord() {
                           </span>
                         </p>
                       </a>
-                      <p className="text-[0.9rem]">
+                      <p className="text-xs">
                         Watching: <strong>{val?.state}</strong>
                       </p>
-                      <p className="text-xs">
+                      <p className="text-[0.7rem]">
                         {hours}
                         {minutes}:{seconds} elapsed
                       </p>
@@ -150,8 +150,8 @@ export default function Discord() {
                     </div>
                     <div className="flex flex-col items-start justify-center ml-4">
                       <p className="font-semibold self-left">{val?.name}</p>
-                      <p className="text-[0.9rem]">{val?.details}</p>
-                      <p className="text-[0.9rem]">{val?.state}</p>
+                      <p className="text-xs">{val?.details}</p>
+                      <p className="text-xs">{val?.state}</p>
                     </div>
                   </motion.div>
                 );
@@ -176,9 +176,9 @@ export default function Discord() {
                   </div>
                   <div className="flex flex-col items-start justify-center ml-4">
                     <p className="font-semibold self-left">{val?.name}</p>
-                    <p className="text-[0.9rem]">{val?.details}</p>
-                    <p className="text-[0.9rem]">{val?.state}</p>
-                    <p className="text-xs">
+                    <p className="text-xs">{val?.details}</p>
+                    <p className="text-xs">{val?.state}</p>
+                    <p className="text-[0.7rem] mt-1">
                       {hours}
                       {minutes}:{seconds} elapsed
                     </p>
@@ -233,9 +233,9 @@ export default function Discord() {
                         </span>
                       </p>
                     </a>
-                    <p className="text-[0.9rem]">by {data?.spotify?.artist}</p>
-                    <p className="text-[0.9rem]">on {data?.spotify?.album}</p>
-                    <p className="text-xs">
+                    <p className="text-xs">by {data?.spotify?.artist}</p>
+                    <p className="text-xs">on {data?.spotify?.album}</p>
+                    <p className="text-[0.7rem] mt-1">
                       {shours}
                       {sminutes}:{sseconds} elapsed
                     </p>
@@ -245,11 +245,20 @@ export default function Discord() {
             }
 
             if (val?.name.match("Skyblock")) {
+              const url = isNaN(parseInt(val?.assets?.large_image!))
+                ? "https://cdn.discordapp.com/app-assets/653443797182578707/722248663555899515.png"
+                : `https://cdn.discordapp.com/app-assets/${val?.application_id}/${val?.assets?.large_image}.png`;
               return (
-                <div className={boxStyle} key={index}>
+                <motion.div
+                  className={boxStyle}
+                  key={index}
+                  initial={{ opacity: 0, y: -20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: duration, delay: index * childDelay }}
+                >
                   <div className="self-center h-full">
                     <img
-                      src={`https://cdn.discordapp.com/app-assets/${val?.application_id}/${val?.assets?.large_image}.png`}
+                      src={url}
                       className="rounded-md"
                       width={imgWH}
                       height={imgWH}
@@ -258,14 +267,14 @@ export default function Discord() {
                   </div>
                   <div className="flex flex-col items-start justify-center ml-4">
                     <p className="font-semibold self-left">{val?.name}</p>
-                    <p className="text-[0.9rem]">{val?.details}</p>
-                    <p className="text-[0.9rem]">{val?.state}</p>
-                    <p className="text-xs">
+                    <p className="text-xs">{val?.details}</p>
+                    <p className="text-xs">{val?.state}</p>
+                    <p className="text-[0.7rem] mt-1">
                       {hours}
                       {minutes}:{seconds} elapsed
                     </p>
                   </div>
-                </div>
+                </motion.div>
               );
             }
 
@@ -291,9 +300,9 @@ export default function Discord() {
                 </div>
                 <div className="flex flex-col items-start justify-center ml-4">
                   <p className="font-semibold self-left">{val?.name}</p>
-                  <p className="text-[0.9rem]">{val?.details}</p>
-                  <p className="text-[0.9rem]">{val?.state}</p>
-                  <p className="text-xs">
+                  <p className="text-xs">{val?.details}</p>
+                  <p className="text-xs">{val?.state}</p>
+                  <p className="text-[0.7rem] mt-1">
                     {isNaN(val?.timestamps?.start!) ? null : hours}
                     {minutes}:{seconds} elapsed
                   </p>
