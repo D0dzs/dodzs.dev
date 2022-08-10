@@ -99,11 +99,10 @@ export default function Navbar() {
                       <div className="text-white font-semibold flex flex-col justify-start gap-3 p-3 pb-4">
                         {links.map(({ display, href }, index) => {
                           return (
-                            <Link href={href} rel="noreferrer">
+                            <Link href={href} rel="noreferrer" key={index}>
                               <button
                                 onClick={() => setIsOpen(false)}
                                 className="min-w-min flex ml-4"
-                                key={index}
                               >
                                 <span>{display.replace("/", "")}</span>
                               </button>
