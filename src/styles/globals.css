@@ -4,7 +4,7 @@
 
 html,
 body {
-  @apply box-border;
+  @apply box-border text-white;
   scroll-behavior: smooth;
   scrollbar-color: rgb(121, 121, 121) rgb(61, 61, 61);
   scrollbar-width: thin;
@@ -13,6 +13,29 @@ body {
 
 .ball-transitions {
   transition: opacity 0.2s, transform 0.1s;
+}
+
+#cursor {
+  @apply bg-white transition-opacity ml-1 self-center;
+  width: 2px;
+  height: 15px;
+  -webkit-animation: blink 1s infinite;
+}
+
+@-webkit-keyframes blink {
+  0% {
+    background: rgba(0, 0, 0, 0);
+  }
+  50% {
+    background: rgba(255, 255, 255, 1);
+  }
+  100% {
+    background: rgba(0, 0, 0, 0);
+  }
+}
+
+::selection {
+  @apply bg-black text-neutral-50;
 }
 
 /* 

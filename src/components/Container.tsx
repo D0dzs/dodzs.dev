@@ -60,6 +60,7 @@ export default function Container(props: any) {
         <meta property="og:description" content={config.description} />
         <meta property="og:title" content={config.title} />
         <meta property="og:url" content={config.url + router.asPath} />
+        <meta property="og:image" content={"/meta-image.png"} />
         <title>
           {config.url} |{" "}
           {router.asPath == "/"
