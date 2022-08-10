@@ -40,7 +40,7 @@ export default function Discord() {
               <span className="bg-gradient-to-r from-orange-400 to-red-500 text-transparent bg-clip-text min-w-min font-extrabold">
                 {data?.discord_user.username}
               </span>{" "}
-              nem elérhető vagy nem csinál semmit épp.
+              nem elérhető vagy épp semmit nem csinál.
             </div>
           ) : null}
 
