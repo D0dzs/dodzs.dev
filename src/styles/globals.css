@@ -15,13 +15,6 @@ body {
   transition: opacity 0.2s, transform 0.1s;
 }
 
-.mobile__navbar {
-  @apply absolute top-16 left-0 w-screen h-min p-8 bg-black/50 backdrop-blur-sm transition-all duration-200 ease-in-out flex flex-col justify-center items-center gap-4 font-semibold z-50 overflow-hidden;
-}
-
-.mobile__navbar span {
-  @apply cursor-pointer;
-}
 /* 
 @media only screen and (max-width: 1024px) {
   #ball-canvas {
