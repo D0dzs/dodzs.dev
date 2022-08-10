@@ -2,7 +2,7 @@ import { useRouter } from "next/router";
 import React from "react";
 import Container from "../components/Container";
 
-export default function about() {
+export default function About() {
   const router = useRouter();
 
   return (
