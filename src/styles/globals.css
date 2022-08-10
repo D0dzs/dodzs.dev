@@ -4,7 +4,7 @@
 
 html,
 body {
-  @apply box-border text-white;
+  @apply box-border text-white bg-black;
   scroll-behavior: smooth;
   scrollbar-color: rgb(121, 121, 121) rgb(61, 61, 61);
   scrollbar-width: thin;
