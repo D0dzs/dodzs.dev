@@ -99,17 +99,15 @@ export default function Navbar() {
                       <div className="text-white font-semibold flex flex-col justify-start gap-3 p-3 pb-4">
                         {links.map(({ display, href }, index) => {
                           return (
-                            <button
-                              onClick={() => setIsOpen(false)}
-                              className="w-max ml-4"
-                              key={index}
-                            >
-                              <Link href={href} rel="noreferrer">
-                                <span className="">
-                                  {display.replace("/", "")}
-                                </span>
-                              </Link>
-                            </button>
+                            <Link href={href} rel="noreferrer">
+                              <button
+                                onClick={() => setIsOpen(false)}
+                                className="min-w-min flex ml-4"
+                                key={index}
+                              >
+                                <span>{display.replace("/", "")}</span>
+                              </button>
+                            </Link>
                           );
                         })}
                       </div>

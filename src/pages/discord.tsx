@@ -22,25 +22,17 @@ export default function Discord() {
   return (
     <Container>
       <div className="flex flex-col items-center justify-center gap-4">
-        <motion.div
-          initial={{ opacity: 0, size: "0%" }}
-          animate={{ opacity: 1, size: "100%" }}
-          transition={{ ease: "anticipate", duration: 1 }}
-        >
-          <h1 className="my-8 font-semibold text-3xl font-mono text-[#7c85e9] flex flex-col">
-            <span className="first-letter:text-[#5865F2]">
-              Discord Presences
-            </span>
-            <span
-              className={`text-sm text-slate-400 self-center min-w-0 ${
-                data?.activities.length == 0 ? "hidden" : "block"
-              }`}
-            >
-              Aktív:{" "}
-              {data?.activities.length == 0 ? "N/A" : data?.activities.length}
-            </span>
-          </h1>
-        </motion.div>
+        <h1 className="my-8 font-semibold text-3xl font-mono text-[#7c85e9] flex flex-col">
+          <span className="first-letter:text-[#5865F2]">Discord Presences</span>
+          <span
+            className={`text-sm text-slate-400 self-center min-w-0 ${
+              data?.activities.length == 0 ? "hidden" : "block"
+            }`}
+          >
+            Aktív:{" "}
+            {data?.activities.length == 0 ? "N/A" : data?.activities.length}
+          </span>
+        </h1>
         <motion.section className="flex flex-col gap-8 select-none m-8 md:flex-row flex-wrap md:min-w-screen flex-auto justify-center lg:w-full">
           {data?.activities.length == 0 ? (
             <div className="font-mono text-xl text-center text-gray-300">
@@ -48,7 +40,7 @@ export default function Discord() {
               <span className="bg-gradient-to-r from-orange-400 to-red-500 text-transparent bg-clip-text min-w-min font-extrabold">
                 {data?.discord_user.username}
               </span>{" "}
-              jelenleg nem játszik semmivel :(
+              nem elérhető vagy nem csinál semmit épp.
             </div>
           ) : null}
 
