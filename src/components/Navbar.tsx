@@ -67,7 +67,7 @@ export default function Navbar() {
           <Transition appear show={isOpen} as={Fragment}>
             <Dialog
               as={motion.div}
-              className="relative z-10"
+              className="relative z-[999]"
               onClose={() => setIsOpen(false)}
             >
               <div className="fixed inset-0 overflow-y-auto">
@@ -81,7 +81,7 @@ export default function Navbar() {
                     leaveFrom="opacity-100 scale-100"
                     leaveTo="opacity-0 scale-95"
                   >
-                    <Dialog.Panel className="w-full max-w-md transform overflow-hidden rounded bg-zinc-800/80 backdrop-blur-sm text-left align-middle shadow-xl transition-all">
+                    <Dialog.Panel className="w-screen transform overflow-hidden rounded bg-zinc-800/80 backdrop-blur-sm text-left align-middle shadow-xl transition-all basis-auto">
                       <Dialog.Title
                         as="div"
                         className="flex justify-between bg-black/50 p-3"
