@@ -105,7 +105,7 @@ const Home: NextPage = () => {
           </div>
           <div
             id="tech-container"
-            className="flex flex-col items-center gap-y-2"
+            className="flex flex-col items-center gap-y-2 md:flex-row md:flex-wrap md:w-[1120px] md:gap-3 md:justify-center md:mx-auto"
           >
             <div className="bg-black/80 rounded-2xl p-1 w-80 tech-item">
               <p className="flex self-center justify-between p-2">
