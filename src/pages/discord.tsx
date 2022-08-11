@@ -45,19 +45,19 @@ export default function Discord() {
           ) : null}
 
           {data?.activities.map((val, index) => {
-            const startTimestampGlobal = val?.timestamps?.start;
+            const startTimestamplobal = val?.timestamps?.start;
             const hours =
-              new Date(time - startTimestampGlobal!).getUTCHours() == 0
+              new Date(time - startTimestamplobal!).getUTCHours() == 0
                 ? null
-                : `${new Date(time - startTimestampGlobal!).getUTCHours()}:`;
+                : `${new Date(time - startTimestamplobal!).getUTCHours()}:`;
             const minutes =
-              new Date(time - startTimestampGlobal!).getUTCMinutes() > 9
-                ? `${new Date(time - startTimestampGlobal!).getUTCMinutes()}`
-                : `0${new Date(time - startTimestampGlobal!).getUTCMinutes()}`;
+              new Date(time - startTimestamplobal!).getUTCMinutes() > 9
+                ? `${new Date(time - startTimestamplobal!).getUTCMinutes()}`
+                : `0${new Date(time - startTimestamplobal!).getUTCMinutes()}`;
             const seconds =
-              new Date(time - startTimestampGlobal!).getUTCSeconds() > 9
-                ? `${new Date(time - startTimestampGlobal!).getUTCSeconds()}`
-                : `0${new Date(time - startTimestampGlobal!).getUTCSeconds()}`;
+              new Date(time - startTimestamplobal!).getUTCSeconds() > 9
+                ? `${new Date(time - startTimestamplobal!).getUTCSeconds()}`
+                : `0${new Date(time - startTimestamplobal!).getUTCSeconds()}`;
 
             if (val?.assets?.large_text.match("PreMiD")) {
               let srcURL = val?.assets?.large_image;
@@ -180,19 +180,37 @@ export default function Discord() {
             }
 
             if (val?.name.match("Spotify")) {
-              const startTimestamp = data?.spotify?.timestamps.start;
+              const startTimestamp = data?.spotify?.timestamps.start!;
+              const endTimestamp = data?.spotify?.timestamps.end!;
               const shours =
-                new Date(time - startTimestamp!).getUTCHours() == 0
+                new Date(time - startTimestamp).getUTCHours() == 0
                   ? null
-                  : `${new Date(time - startTimestamp!).getUTCHours()}:`;
+                  : `${new Date(time - startTimestamp).getUTCHours()}:`;
               const sminutes =
-                new Date(time - startTimestamp!).getUTCMinutes() > 9
-                  ? `${new Date(time - startTimestamp!).getUTCMinutes()}`
-                  : `0${new Date(time - startTimestamp!).getUTCMinutes()}`;
+                new Date(time - startTimestamp).getUTCMinutes() > 9
+                  ? `${new Date(time - startTimestamp).getUTCMinutes()}`
+                  : `0${new Date(time - startTimestamp).getUTCMinutes()}`;
               const sseconds =
-                new Date(time - startTimestamp!).getUTCSeconds() > 9
-                  ? `${new Date(time - startTimestamp!).getUTCSeconds()}`
-                  : `0${new Date(time - startTimestamp!).getUTCSeconds()}`;
+                new Date(time - startTimestamp).getUTCSeconds() > 9
+                  ? `${new Date(time - startTimestamp).getUTCSeconds()}`
+                  : `0${new Date(time - startTimestamp).getUTCSeconds()}`;
+
+              const ehours =
+                new Date(endTimestamp - startTimestamp).getUTCHours() == 0
+                  ? null
+                  : `${new Date(endTimestamp - startTimestamp).getUTCHours()}:`;
+              const eminutes =
+                new Date(endTimestamp - startTimestamp).getUTCMinutes() > 9
+                  ? `${new Date(endTimestamp - startTimestamp).getUTCMinutes()}`
+                  : `0${new Date(
+                      endTimestamp - startTimestamp
+                    ).getUTCMinutes()}`;
+              const eseconds =
+                new Date(endTimestamp - startTimestamp).getUTCSeconds() > 9
+                  ? `${new Date(endTimestamp - startTimestamp).getUTCSeconds()}`
+                  : `0${new Date(
+                      endTimestamp - startTimestamp
+                    ).getUTCSeconds()}`;
 
               return (
                 <motion.div
@@ -229,14 +247,8 @@ export default function Discord() {
                     <p className="text-xs">on {data?.spotify?.album}</p>
                     <p className="text-[0.7rem] mt-1">
                       {shours}
-                      {sminutes}:{sseconds}/
-                      {new Date(
-                        data?.spotify?.timestamps.end! - startTimestamp!
-                      ).getUTCMinutes()}
-                      :
-                      {new Date(
-                        data?.spotify?.timestamps.end! - startTimestamp!
-                      ).getUTCSeconds()}
+                      {sminutes}:{sseconds}/{ehours}
+                      {eminutes}:{eseconds}
                     </p>
                   </div>
                 </motion.div>
