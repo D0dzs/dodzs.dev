@@ -2,7 +2,7 @@ const date = new Date().getFullYear();
 const yrs = date - 2005;
 
 export const config = {
-    site_version: '1.0.1',
+    site_version: '1.0.2',
     yrs_old: yrs,
     title: "Dodzs.dev",
     author: "Dodzs",

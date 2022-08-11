@@ -34,6 +34,17 @@ body {
   }
 }
 
+.tech-item {
+  opacity: 0;
+  transform: translateY(-20px);
+  transition: all 400ms ease-in;
+}
+
+.tech-item-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
 ::selection {
   @apply bg-black text-neutral-50;
 }

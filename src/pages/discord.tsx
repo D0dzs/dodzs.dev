@@ -10,8 +10,8 @@ export default function Discord() {
   const boxStyle =
     "flex flex-row bg-white/5 backdrop-blur-sm shadow-xl rounded-xl w-96 min-w-0 md:hover:bg-white/10 md:transition-all";
   const imgWH = 100;
-  const duration = 0.3;
-  const childDelay = 0.1;
+  const duration = 0.4;
+  const childDelay = 0.2;
 
   useEffect(() => {
     setInterval(() => {
