@@ -60,7 +60,7 @@ const Home: NextPage = () => {
         >
           <div
             id="temrinal-wrapper"
-            className="h-fit min-w-screen bg-zinc-800/80 backdrop-blur-sm m-4 rounded-2xl font-mono md:min-w-full shadow-black shadow-2xl"
+            className="h-fit min-w-screen bg-zinc-800/80 backdrop-blur-sm m-4 rounded-2xl font-mono md:w-[30rem] shadow-black shadow-2xl"
           >
             <div className="terminal-title bg-neutral-900 p-2 rounded-t-2xl flex justify-between">
               <p className="ml-1">
@@ -107,47 +107,47 @@ const Home: NextPage = () => {
             id="tech-container"
             className="flex flex-col items-center gap-y-2 md:flex-row md:flex-wrap md:w-[1120px] md:gap-3 md:justify-center md:mx-auto"
           >
-            <div className="bg-black/80 rounded-2xl p-1 w-80 tech-item">
+            <div className="bg-black/60 rounded-2xl p-1 w-80 tech-item">
               <p className="flex self-center justify-between p-2">
                 <FaCss3 size={26} color={"#2965f1"} /> CSS3
               </p>
             </div>
-            <div className="bg-black/80 rounded-2xl p-1 w-80 tech-item">
+            <div className="bg-black/60 rounded-2xl p-1 w-80 tech-item">
               <p className="flex self-center justify-between p-2">
                 <SiGithub size={26} /> Github
               </p>
             </div>
-            <div className="bg-black/80 rounded-2xl p-1 w-80 tech-item">
+            <div className="bg-black/60 rounded-2xl p-1 w-80 tech-item">
               <p className="flex self-center justify-between p-2">
                 <SiHtml5 size={26} color={"#e44d25"} /> HTML5
               </p>
             </div>
-            <div className="bg-black/80 rounded-2xl p-1 w-80 tech-item">
+            <div className="bg-black/60 rounded-2xl p-1 w-80 tech-item">
               <p className="flex self-center justify-between p-2">
                 <TbBrandNextjs size={26} /> Next.js
               </p>
             </div>
-            <div className="bg-black/80 rounded-2xl p-1 w-80 tech-item">
+            <div className="bg-black/60 rounded-2xl p-1 w-80 tech-item">
               <p className="flex self-center justify-between p-2">
                 <SiPostman size={26} color={"#fd6c35"} /> Postman
               </p>
             </div>
-            <div className="bg-black/80 rounded-2xl p-1 w-80 tech-item">
+            <div className="bg-black/60 rounded-2xl p-1 w-80 tech-item">
               <p className="flex self-center justify-between p-2">
                 <FaReact size={26} color={"#61dafb"} /> React
               </p>
             </div>
-            <div className="bg-black/80 rounded-2xl p-1 w-80 tech-item">
+            <div className="bg-black/60 rounded-2xl p-1 w-80 tech-item">
               <p className="flex self-center justify-between p-2">
                 <SiTailwindcss size={26} color={"#38bdf8"} /> TailwindCSS
               </p>
             </div>
-            <div className="bg-black/80 rounded-2xl p-1 w-80 tech-item">
+            <div className="bg-black/60 rounded-2xl p-1 w-80 tech-item">
               <p className="flex self-center justify-between p-2">
                 <SiVercel size={26} /> Vercel
               </p>
             </div>
-            <div className="bg-black/80 rounded-2xl p-1 w-80 tech-item">
+            <div className="bg-black/60 rounded-2xl p-1 w-80 tech-item">
               <p className="flex self-center justify-between p-2">
                 <SiVisualstudiocode size={26} color={"#106dbf"} /> Visual Studio
                 Code
