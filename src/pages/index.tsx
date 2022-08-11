@@ -49,18 +49,18 @@ const Home: NextPage = () => {
     <Container>
       <section
         id="hero-wrapper"
-        className="flex flex-col md:flex-row md:items-center md:justify-center md:h-screen"
+        className="flex flex-col lg:flex-row md:items-center md:justify-center md:h-screen"
       >
-        <div id="hero-title" className="md:transform md:-translate-y-24">
+        <div id="hero-title" className="p-2 md:transform md:-translate-y-24">
           <p className={welcomeStyle}>Üdvözöllek az oldalamon!</p>
         </div>
         <div
           id="hero-subtitle"
-          className="md:transform md:-translate-y-24 md:ml-2"
+          className="md:transform md:-translate-y-24 md:ml-2 mb-16 md:mb-0"
         >
           <div
             id="temrinal-wrapper"
-            className="h-fit min-w-screen bg-zinc-800/80 backdrop-blur-sm m-4 rounded-2xl font-mono md:w-[30rem] shadow-black shadow-2xl"
+            className="h-fit min-w-fit bg-zinc-800/80 backdrop-blur-sm mx-6 rounded-2xl font-mono md:w-[30rem] shadow-black shadow-2xl"
           >
             <div className="terminal-title bg-neutral-900 p-2 rounded-t-2xl flex justify-between">
               <p className="ml-1">
@@ -105,7 +105,7 @@ const Home: NextPage = () => {
           </div>
           <div
             id="tech-container"
-            className="flex flex-col items-center gap-y-2 md:flex-row md:flex-wrap md:w-[1120px] md:gap-3 md:justify-center md:mx-auto"
+            className="flex flex-col items-center gap-y-2 md:flex-row md:flex-wrap md:w-[760px] md:gap-3 md:justify-center md:mx-auto lg:w-[1020px]"
           >
             <div className="bg-black/60 rounded-2xl p-1 w-80 tech-item">
               <p className="flex self-center justify-between p-2">

@@ -5,7 +5,7 @@ import { useLanyardWs } from "use-lanyard";
 import { motion } from "framer-motion";
 
 export default function Discord() {
-  const [time, setTime] = useState(new Date().getTime());
+  const [time, setTime] = useState(0);
   const data = useLanyardWs("401390393746259978");
   const boxStyle =
     "flex flex-row bg-white/5 backdrop-blur-sm shadow-xl rounded-xl w-96 min-w-0 md:hover:bg-white/10 md:transition-all";
@@ -229,7 +229,14 @@ export default function Discord() {
                     <p className="text-xs">on {data?.spotify?.album}</p>
                     <p className="text-[0.7rem] mt-1">
                       {shours}
-                      {sminutes}:{sseconds} elapsed
+                      {sminutes}:{sseconds}/
+                      {new Date(
+                        data?.spotify?.timestamps.end! - startTimestamp!
+                      ).getUTCMinutes()}
+                      :
+                      {new Date(
+                        data?.spotify?.timestamps.end! - startTimestamp!
+                      ).getUTCSeconds()}
                     </p>
                   </div>
                 </motion.div>
