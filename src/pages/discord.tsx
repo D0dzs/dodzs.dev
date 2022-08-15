@@ -1,288 +1,100 @@
 import React, { useEffect, useState } from "react";
 import Container from "../components/Container";
-import { CgExternal } from "react-icons/cg";
 import { useLanyardWs } from "use-lanyard";
+import { padTo2Digits } from "../utils/padTo2Digits";
+import { getHMS } from "../utils/getHMS";
+import { httpsRegEx } from "../utils/httpsRegEx";
+import { BiLinkExternal } from "react-icons/bi";
 import { motion } from "framer-motion";
 
 export default function Discord() {
-  const [time, setTime] = useState(0);
-  const data = useLanyardWs("401390393746259978");
   const boxStyle =
-    "flex flex-row bg-white/5 backdrop-blur-sm shadow-xl rounded-xl w-96 min-w-0 md:hover:bg-white/10 md:transition-all";
-  const imgWH = 100;
-  const duration = 0.4;
-  const childDelay = 0.2;
-
+    "flex flex-row w-auto bg-zinc-800/50 m-4 rounded-2xl overflow-hidden md:w-1/2";
+  const data = useLanyardWs("401390393746259978");
+  const [time, setTime] = useState(0);
   useEffect(() => {
     setInterval(() => {
       setTime(new Date().getTime());
     }, 1000);
-  });
+
+    return () => {
+      clearInterval();
+    };
+  }, []);
+
+  const duration = 0.5;
+  const childDelay = 0.1;
 
   return (
     <Container>
-      <div className="flex flex-col items-center justify-center gap-4">
-        <h1 className="my-8 font-semibold text-3xl font-mono text-[#7c85e9] flex flex-col">
-          <span className="first-letter:text-[#5865F2]">Discord Presences</span>
-          <span
-            className={`text-sm text-slate-400 self-center min-w-0 ${
-              data?.activities.length == 0 ? "hidden" : "block"
-            }`}
-          >
-            Aktív:{" "}
-            {data?.activities.length == 0 ? "N/A" : data?.activities.length}
-          </span>
+      <div className="text-center font-extrabold p-4 mt-4 flex justify-center gap-0 flex-col">
+        <h1 className="text-4xl first-letter:text-[#6976ff] text-[#7883ff]">
+          Discord Presences
+          <br />
         </h1>
-        <motion.section className="flex flex-col gap-8 select-none m-8 md:flex-row flex-wrap md:min-w-screen flex-auto justify-center lg:w-full">
-          {data?.activities.length == 0 ? (
-            <div className="font-mono text-xl text-center text-gray-300">
-              Sajnos{" "}
-              <span className="bg-gradient-to-r from-orange-400 to-red-500 text-transparent bg-clip-text min-w-min font-extrabold">
-                {data?.discord_user.username}
-              </span>{" "}
-              nem elérhető vagy épp semmit nem csinál.
-            </div>
-          ) : null}
+        <motion.span className="text-sm">
+          Aktív: {data?.activities.length}
+        </motion.span>
+      </div>
+      <motion.section className="flex justify-center flex-col mx-auto md:items-center md:flex-row md:w-[70rem] md:flex-wrap md:flex-grow">
+        {data?.activities.map((app, index) => {
+          if (app?.name.match("HBO Max")) return null;
+          const appTimeStart = app?.timestamps?.start!;
+          const eHours = padTo2Digits(getHMS(time - appTimeStart).hours);
+          const eMins = padTo2Digits(getHMS(time - appTimeStart).mins);
+          const eSecs = padTo2Digits(getHMS(time - appTimeStart).secs);
+          const appTimeEnd = app?.timestamps?.end!;
+          const lHours = padTo2Digits(getHMS(time - appTimeEnd).hours * -1 - 1);
+          const lMins = padTo2Digits(getHMS(time - appTimeEnd).mins * -1 - 1);
+          const lSecs = padTo2Digits(getHMS(time - appTimeEnd).secs * -1);
 
-          {data?.activities.map((val, index) => {
-            const startTimestamplobal = val?.timestamps?.start;
-            const hours =
-              new Date(time - startTimestamplobal!).getUTCHours() == 0
-                ? null
-                : `${new Date(time - startTimestamplobal!).getUTCHours()}:`;
-            const minutes =
-              new Date(time - startTimestamplobal!).getUTCMinutes() > 9
-                ? `${new Date(time - startTimestamplobal!).getUTCMinutes()}`
-                : `0${new Date(time - startTimestamplobal!).getUTCMinutes()}`;
-            const seconds =
-              new Date(time - startTimestamplobal!).getUTCSeconds() > 9
-                ? `${new Date(time - startTimestamplobal!).getUTCSeconds()}`
-                : `0${new Date(time - startTimestamplobal!).getUTCSeconds()}`;
-
-            if (val?.assets?.large_text.match("PreMiD")) {
-              let srcURL = val?.assets?.large_image;
-              let httpsURL = srcURL.startsWith("mp:external/") ? true : false;
-
-              if (httpsURL) {
-                srcURL = srcURL.replace(
-                  /.*mp:external/g,
-                  "https://media.discordapp.net/external"
-                );
-              } else {
-                srcURL = `https://cdn.discordapp.com/app-assets/${val?.application_id}/${val?.assets.large_image}.png`;
-              }
-
-              if (val?.name.match("Twitch")) {
-                return (
-                  <motion.div
-                    className={boxStyle}
-                    key={index}
-                    initial={{ opacity: 0, y: -20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{
-                      duration: duration,
-                      delay: index * childDelay,
-                    }}
-                  >
-                    <div className="self-center">
-                      <img
-                        src={srcURL}
-                        className="rounded-md h-full"
-                        width={imgWH}
-                        height={imgWH}
-                        alt={val?.name}
-                      />
-                    </div>
-                    <div className="flex flex-col items-start justify-center ml-4 min-w-0">
-                      <a
-                        href={`https://twitch.tv/${val?.state}`}
-                        target={"_blank"}
-                        rel="noreferrer"
-                        className="text-[#9971e4] md:hover:text-[#815fc0] md:text-white transition-all duration-150 ease-in"
-                      >
-                        <p className="font-semibold self-left flex">
-                          {val?.name}{" "}
-                          <span>
-                            <CgExternal size={24} />
-                          </span>
-                        </p>
-                      </a>
-                      <p className="text-xs">
-                        Watching: <strong>{val?.state}</strong>
-                      </p>
-                      <p className="text-[0.7rem]">
-                        {hours}
-                        {minutes}:{seconds} elapsed
-                      </p>
-                    </div>
-                  </motion.div>
-                );
-              }
-
-              if (isNaN(val?.timestamps?.start!)) {
-                return (
-                  <motion.div
-                    className={boxStyle}
-                    key={index}
-                    initial={{ opacity: 0, y: -20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{
-                      duration: duration,
-                      delay: index * childDelay,
-                    }}
-                  >
-                    <div className="self-center">
-                      <img
-                        src={srcURL}
-                        className="rounded-md h-full"
-                        width={imgWH}
-                        height={imgWH}
-                        alt={val?.name}
-                      />
-                    </div>
-                    <div className="flex flex-col items-start justify-center ml-4">
-                      <p className="font-semibold self-left">{val?.name}</p>
-                      <p className="text-xs">{val?.details}</p>
-                      <p className="text-xs">{val?.state}</p>
-                    </div>
-                  </motion.div>
-                );
-              }
-
+          if (app?.timestamps?.end) {
+            if (app?.name.match("Spotify")) {
               return (
                 <motion.div
                   className={boxStyle}
                   key={index}
                   initial={{ opacity: 0, y: -20 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: duration, delay: index * childDelay }}
+                  transition={{
+                    duration: duration,
+                    delay: index * childDelay,
+                  }}
                 >
-                  <div className="self-center">
+                  <div className="w-24 flex items-center h-auto">
                     <img
-                      src={srcURL}
-                      className="rounded-md h-full"
-                      width={imgWH}
-                      height={imgWH}
-                      alt={val?.name}
+                      src={data?.spotify?.album_art_url}
+                      alt={app.name}
+                      className="w-full text-center h-full"
                     />
                   </div>
-                  <div className="flex flex-col items-start justify-center ml-4">
-                    <p className="font-semibold self-left">{val?.name}</p>
-                    <p className="text-xs">{val?.details}</p>
-                    <p className="text-xs">{val?.state}</p>
-                    <p className="text-[0.7rem] mt-1">
-                      {hours}
-                      {minutes}:{seconds} elapsed
-                    </p>
-                  </div>
-                </motion.div>
-              );
-            }
-
-            if (val?.name.match("Spotify")) {
-              const startTimestamp = data?.spotify?.timestamps.start!;
-              const endTimestamp = data?.spotify?.timestamps.end!;
-              const shours =
-                new Date(time - startTimestamp).getUTCHours() == 0
-                  ? null
-                  : `${new Date(time - startTimestamp).getUTCHours()}:`;
-              const sminutes =
-                new Date(time - startTimestamp).getUTCMinutes() > 9
-                  ? `${new Date(time - startTimestamp).getUTCMinutes()}`
-                  : `0${new Date(time - startTimestamp).getUTCMinutes()}`;
-              const sseconds =
-                new Date(time - startTimestamp).getUTCSeconds() > 9
-                  ? `${new Date(time - startTimestamp).getUTCSeconds()}`
-                  : `0${new Date(time - startTimestamp).getUTCSeconds()}`;
-
-              const ehours =
-                new Date(endTimestamp - startTimestamp).getUTCHours() == 0
-                  ? null
-                  : `${new Date(endTimestamp - startTimestamp).getUTCHours()}:`;
-              const eminutes =
-                new Date(endTimestamp - startTimestamp).getUTCMinutes() > 9
-                  ? `${new Date(endTimestamp - startTimestamp).getUTCMinutes()}`
-                  : `0${new Date(
-                      endTimestamp - startTimestamp
-                    ).getUTCMinutes()}`;
-              const eseconds =
-                new Date(endTimestamp - startTimestamp).getUTCSeconds() > 9
-                  ? `${new Date(endTimestamp - startTimestamp).getUTCSeconds()}`
-                  : `0${new Date(
-                      endTimestamp - startTimestamp
-                    ).getUTCSeconds()}`;
-
-              return (
-                <motion.div
-                  className={boxStyle}
-                  key={index}
-                  initial={{ opacity: 0, y: -20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: duration, delay: index * childDelay }}
-                >
-                  <div className="self-center">
-                    <img
-                      src={`${data?.spotify?.album_art_url}`}
-                      className="rounded-md h-full"
-                      width={imgWH}
-                      height={imgWH}
-                      alt={val?.name}
-                    />
-                  </div>
-                  <div className="flex flex-col items-start justify-center ml-4 min-w-0">
+                  <div className="flex flex-col p-2 self-center ml-1 md:ml-2">
                     <a
                       href={`https://open.spotify.com/track/${data?.spotify?.track_id}`}
-                      target={"_blank"}
                       rel="noreferrer"
-                      className="text-[#68fd9c] md:hover:text-[#1DB954] md:text-white transition-all duration-150 ease-in"
+                      className="text-[#1ed760] md:text-white md:hover:text-[#1ed760] transition-colors duration-150 ease-in-out"
+                      target={"_blank"}
                     >
-                      <p className="font-semibold self-left flex">
-                        {val?.name}{" "}
-                        <span>
-                          <CgExternal size={24} />
+                      <p className="flex items-center">
+                        <span className="text-normal font-semibold mr-1">
+                          {app?.name}
                         </span>
+                        <BiLinkExternal size={18} />
                       </p>
                     </a>
-                    <p className="text-xs">by {data?.spotify?.artist}</p>
-                    <p className="text-xs">on {data?.spotify?.album}</p>
-                    <p className="text-[0.7rem] mt-1">
-                      {shours}
-                      {sminutes}:{sseconds}/{ehours}
-                      {eminutes}:{eseconds}
+                    <p className="text-[.8rem] md:text-[.9rem]">
+                      Listening {data?.spotify?.song}
                     </p>
-                  </div>
-                </motion.div>
-              );
-            }
-
-            if (val?.name.match("Skyblock")) {
-              const url = isNaN(parseInt(val?.assets?.large_image!))
-                ? "https://cdn.discordapp.com/app-assets/653443797182578707/722248663555899515.png"
-                : `https://cdn.discordapp.com/app-assets/${val?.application_id}/${val?.assets?.large_image}.png`;
-              return (
-                <motion.div
-                  className={boxStyle}
-                  key={index}
-                  initial={{ opacity: 0, y: -20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: duration, delay: index * childDelay }}
-                >
-                  <div className="self-center h-full">
-                    <img
-                      src={url}
-                      className="rounded-md"
-                      width={imgWH}
-                      height={imgWH}
-                      alt={val?.name}
-                    />
-                  </div>
-                  <div className="flex flex-col items-start justify-center ml-4">
-                    <p className="font-semibold self-left">{val?.name}</p>
-                    <p className="text-xs">{val?.details}</p>
-                    <p className="text-xs">{val?.state}</p>
-                    <p className="text-[0.7rem] mt-1">
-                      {hours}
-                      {minutes}:{seconds} elapsed
+                    <p className="text-[.7rem] md:text-[.8rem]">
+                      {app?.timestamps ? (
+                        eHours > 0 ? (
+                          `${lHours}:${lMins}:${lSecs} left`
+                        ) : (
+                          `${lMins}:${lSecs} left`
+                        )
+                      ) : (
+                        <span>Paused</span>
+                      )}
                     </p>
                   </div>
                 </motion.div>
@@ -295,34 +107,90 @@ export default function Discord() {
                 key={index}
                 initial={{ opacity: 0, y: -20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: duration, delay: index * childDelay }}
+                transition={{
+                  duration: duration,
+                  delay: index * childDelay,
+                }}
               >
-                <div className="self-center">
+                <div className="w-24 flex items-center h-auto">
                   <img
-                    src={`${val?.assets?.large_image.replace(
-                      /.*https/g,
-                      "https:/"
-                    )}`}
-                    className="rounded-md h-full"
-                    width={imgWH}
-                    height={imgWH}
-                    alt={val?.name}
+                    src={httpsRegEx(app?.assets?.large_image!)}
+                    alt={app.name}
+                    className="w-full text-center h-full"
                   />
                 </div>
-                <div className="flex flex-col items-start justify-center ml-4">
-                  <p className="font-semibold self-left">{val?.name}</p>
-                  <p className="text-xs">{val?.details}</p>
-                  <p className="text-xs">{val?.state}</p>
-                  <p className="text-[0.7rem] mt-1">
-                    {isNaN(val?.timestamps?.start!) ? null : hours}
-                    {minutes}:{seconds} elapsed
+                <div className="flex flex-col p-2 self-center ml-1 md:ml-2">
+                  <h3 className="text-normal font-semibold">{app?.name}</h3>
+                  <p className="text-[.8rem] md:text-[.9rem]">
+                    {app?.name.match("Netflix")
+                      ? `${app?.details} ${app.state}`
+                      : app.details}
+                  </p>
+                  <p className="text-[.7rem] md:text-[.8rem]">
+                    {app?.timestamps ? (
+                      eHours > 0 ? (
+                        `${lHours}:${lMins}:${lSecs} left`
+                      ) : (
+                        `${lMins}:${lSecs} left`
+                      )
+                    ) : (
+                      <span>Paused</span>
+                    )}
                   </p>
                 </div>
               </motion.div>
             );
-          })}
-        </motion.section>
-      </div>
+          } else {
+            return (
+              <motion.div
+                className={boxStyle}
+                key={index}
+                initial={{ opacity: 0, y: -20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{
+                  duration: duration,
+                  delay: index * childDelay,
+                }}
+              >
+                <div className="w-24 flex items-center h-auto">
+                  <img
+                    src={
+                      httpsRegEx(app?.assets?.large_image!).includes(
+                        "app-assets"
+                      )
+                        ? `${httpsRegEx(app?.assets?.large_image!)}${
+                            app?.application_id
+                          }/${app?.assets?.large_image}`
+                        : httpsRegEx(app?.assets?.large_image!)
+                    }
+                    alt={app.name}
+                    className="w-full text-center h-full"
+                  />
+                </div>
+                <div className="flex flex-col p-2 self-center ml-1 md:ml-2">
+                  <h3 className="text-normal font-semibold">{app?.name}</h3>
+                  <p className="text-[.8rem] md:text-[.9rem]">
+                    {app?.name.match("Netflix")
+                      ? `${app?.details} ${app.state}`
+                      : app.details}
+                  </p>
+                  <p className="text-[.7rem] md:text-[.8rem]">
+                    {app?.timestamps ? (
+                      eHours > 0 ? (
+                        `${eHours}:${eMins}:${eSecs} elapsed`
+                      ) : (
+                        `${eMins}:${eSecs} elapsed`
+                      )
+                    ) : (
+                      <span>Paused</span>
+                    )}
+                  </p>
+                </div>
+              </motion.div>
+            );
+          }
+        })}
+      </motion.section>
     </Container>
   );
 }

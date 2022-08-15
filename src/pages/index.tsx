@@ -15,28 +15,11 @@ import {
   SiVisualstudiocode,
 } from "react-icons/si";
 import { FaReact, FaCss3 } from "react-icons/fa";
-
-function animateOnScroll(
-  target: any,
-  triggerPosition: any,
-  activeClass: any,
-  reversible = false
-) {
-  let targetEl = document.querySelectorAll(target);
-  targetEl.forEach((el) => {
-    let targetElTop = el.getBoundingClientRect().top;
-    let windowHeight = window.innerHeight / 0.9;
-    if (targetElTop <= windowHeight * triggerPosition) {
-      el.classList.add(activeClass);
-    } else if (targetElTop >= windowHeight && reversible) {
-      el.classList.remove(activeClass);
-    }
-  });
-}
+import { animateOnScroll } from "../utils/animateOnScroll";
 
 const Home: NextPage = () => {
   const welcomeStyle =
-    "text-4xl font-bold text-center bg-gradient-to-b md:bg-gradient-to-r from-slate-200 via-slate-300 to-slate-400 bg-clip-text text-transparent mt-40 my-24 md:m-0";
+    "text-4xl font-bold text-center text-white mt-40 my-24 md:m-0";
   const [browserType, setbrowserType] = useState("");
   useEffect(() => {
     setbrowserType(navigator.userAgent.replace(/\/.+/g, ""));
@@ -49,14 +32,14 @@ const Home: NextPage = () => {
     <Container>
       <section
         id="hero-wrapper"
-        className="flex flex-col lg:flex-row md:items-center md:justify-center md:h-screen"
+        className="flex flex-col lg:flex-row md:items-center md:justify-center md:h-[75vh]"
       >
-        <div id="hero-title" className="p-2 md:transform md:-translate-y-24">
+        <div id="hero-title" className="p-2 md:transform md:-translate-y-12">
           <p className={welcomeStyle}>Üdvözöllek az oldalamon!</p>
         </div>
         <div
           id="hero-subtitle"
-          className="md:transform md:-translate-y-24 md:ml-2 mb-16 md:mb-0"
+          className="md:transform md:-translate-y-12 md:ml-2 mb-16 md:mb-0"
         >
           <div
             id="temrinal-wrapper"
@@ -95,10 +78,10 @@ const Home: NextPage = () => {
       <section id="technoligies-wrapper" className="h-fit mt-16">
         <div id="tech-wrapper" className="pb-8">
           <div id="tech-title" className="p-4 text-center">
-            <p className="font-bold first-letter:text-neutral-400 text-neutral-300 text-2xl">
+            <p className="font-bold first-letter:text-neutral-300 text-neutral-50 text-2xl">
               Technológiák
             </p>
-            <p className="text-slate-500">
+            <p className="text-slate-300">
               Ide felsoroltam azokat a technológiákat amiket felhasználtam ehhez
               a weboldal készítése során.
             </p>
