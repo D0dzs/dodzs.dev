@@ -9,9 +9,10 @@ import { motion } from "framer-motion";
 
 export default function Discord() {
   const boxStyle =
-    "flex flex-row w-auto bg-zinc-800/50 m-4 rounded-2xl overflow-hidden md:w-1/2";
+    "flex flex-row w-auto bg-zinc-800/50 m-4 rounded-lg overflow-hidden md:w-1/2";
   const data = useLanyardWs("401390393746259978");
   const [time, setTime] = useState(0);
+  const [count, setCount] = useState<number>(0);
   useEffect(() => {
     setInterval(() => {
       setTime(new Date().getTime());
@@ -22,21 +23,43 @@ export default function Discord() {
     };
   }, []);
 
+  useEffect(() => {
+    setTimeout(() => {
+      setCount(data?.activities?.length!);
+    }, 1000);
+  }, []);
+
   const duration = 0.5;
   const childDelay = 0.1;
 
   return (
     <Container>
-      <div className="text-center font-extrabold p-4 mt-4 flex justify-center gap-0 flex-col">
-        <h1 className="text-4xl bg-gradient-to-r from-[#cabdff] via-[#ffbc99] to-[#cabdff] bg-clip-text text-transparent bg-grad-anim">
+      <div className="text-center p-4 mt-4 flex justify-center gap-0 flex-col">
+        <h1 className="font-extrabold text-4xl bg-gradient-to-r from-[#cabdff] via-[#ffbc99] to-[#cabdff] bg-clip-text text-transparent bg-grad-anim">
           Discord Presences
-          <br />
         </h1>
-        <motion.span className="text-sm">
-          Aktív: {data?.activities.length}
-        </motion.span>
+        {data?.activities.length == 0 ? null : (
+          <span className="text-sm font-bold">
+            {count! == 0 ? (
+              "Loading..."
+            ) : (
+              <>{data?.activities.length} presence</>
+            )}
+          </span>
+        )}
       </div>
       <motion.section className="flex justify-center flex-col mx-auto md:items-center md:flex-row md:min-w-screen xl:w-[70rem] md:flex-wrap md:flex-grow">
+        {data?.activities.length == 0 && (
+          <div className="text-slate-300 text-center mx-auto w-64 md:w-auto md:text-xl">
+            Sajnálattal kell közölnöm, hogy{" "}
+            <span className="font-extrabold text-orange-400">Zsolt</span>{" "}
+            {data?.discord_status == "offline"
+              ? "offline"
+              : "nem foglalkozik semmivel"}
+            .
+          </div>
+        )}
+
         {data?.activities.map((app, index) => {
           if (app?.name.match("HBO Max")) return null;
           const appTimeStart = app?.timestamps?.start!;

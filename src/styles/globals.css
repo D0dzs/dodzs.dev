@@ -52,15 +52,15 @@ body {
 
 @keyframes bg-pos-mov {
   0% {
-    background-position: 0 0;
+    background-position: 0;
   }
   100% {
-    background-position: 200% 0;
+    background-position: 200%;
   }
 }
 
 ::selection {
-  @apply bg-blue-400/80;
+  @apply bg-blue-500 text-white;
 }
 
 /* 
