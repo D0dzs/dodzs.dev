@@ -38,7 +38,6 @@ export default function Discord() {
       </div>
       <motion.section className="flex justify-center flex-col mx-auto md:items-center md:flex-row md:min-w-screen xl:w-[70rem] md:flex-wrap md:flex-grow">
         {data?.activities.map((app, index) => {
-          if (app?.name.match("HBO Max")) return null;
           const appTimeStart = app?.timestamps?.start!;
           const eHours = padTo2Digits(getHMS(time - appTimeStart).hours);
           const eMins = padTo2Digits(getHMS(time - appTimeStart).mins);
