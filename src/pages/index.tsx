@@ -24,7 +24,7 @@ const Home: NextPage = () => {
   useEffect(() => {
     setbrowserType(navigator.userAgent.replace(/\/.+/g, ""));
     window.addEventListener("scroll", () => {
-      animateOnScroll(".tech-item", 0.8, "tech-item-visible", false);
+      animateOnScroll(".tech-item", 0.8, "tech-item-visible");
     });
   });
 

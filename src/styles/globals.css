@@ -45,8 +45,22 @@ body {
   transform: translateY(0);
 }
 
+.bg\-grad-anim {
+  background-size: 200%;
+  animation: bg-pos-mov 3s linear infinite;
+}
+
+@keyframes bg-pos-mov {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
 ::selection {
-  @apply bg-black text-neutral-50;
+  @apply bg-blue-400/80;
 }
 
 /* 

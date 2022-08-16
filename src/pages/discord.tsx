@@ -28,7 +28,7 @@ export default function Discord() {
   return (
     <Container>
       <div className="text-center font-extrabold p-4 mt-4 flex justify-center gap-0 flex-col">
-        <h1 className="text-4xl first-letter:text-[#6976ff] text-[#7883ff]">
+        <h1 className="text-4xl bg-gradient-to-r from-[#cabdff] via-[#ffbc99] to-[#cabdff] bg-clip-text text-transparent bg-grad-anim">
           Discord Presences
           <br />
         </h1>
@@ -36,7 +36,7 @@ export default function Discord() {
           Aktív: {data?.activities.length}
         </motion.span>
       </div>
-      <motion.section className="flex justify-center flex-col mx-auto md:items-center md:flex-row md:w-[70rem] md:flex-wrap md:flex-grow">
+      <motion.section className="flex justify-center flex-col mx-auto md:items-center md:flex-row md:min-w-screen xl:w-[70rem] md:flex-wrap md:flex-grow">
         {data?.activities.map((app, index) => {
           if (app?.name.match("HBO Max")) return null;
           const appTimeStart = app?.timestamps?.start!;
@@ -83,7 +83,16 @@ export default function Discord() {
                       </p>
                     </a>
                     <p className="text-[.8rem] md:text-[.9rem]">
-                      Listening {data?.spotify?.song}
+                      {data?.spotify?.song.length! > 20 ||
+                      data?.spotify?.artist.length! > 20 ? (
+                        <>Listening {data?.spotify?.song}</>
+                      ) : (
+                        <>
+                          by {data?.spotify?.artist}
+                          <br />
+                          on {data?.spotify?.song}
+                        </>
+                      )}
                     </p>
                     <p className="text-[.7rem] md:text-[.8rem]">
                       {app?.timestamps ? (
