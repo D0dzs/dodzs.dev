@@ -26,7 +26,7 @@ const Home: NextPage = () => {
     window.addEventListener("scroll", () => {
       animateOnScroll(".tech-item", 0.8, "tech-item-visible");
     });
-  });
+  }, []);
 
   return (
     <Container>
