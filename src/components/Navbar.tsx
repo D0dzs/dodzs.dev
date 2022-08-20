@@ -104,7 +104,14 @@ export default function Navbar() {
                                 onClick={() => setIsOpen(false)}
                                 className="min-w-min flex ml-4"
                               >
-                                <span>{display.replace("/", "")}</span>
+                                <span>
+                                  {display
+                                    .replace("/", "")
+                                    .replace(
+                                      display.charAt(1),
+                                      display.charAt(1).toUpperCase()
+                                    )}
+                                </span>
                               </button>
                             </Link>
                           );

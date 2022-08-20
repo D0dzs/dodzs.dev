@@ -1,14 +1,13 @@
 {
+  "success": true,
+  "data": {
     "spotify": {
-      "track_id": "7hovQd7qhbCTyLnE1LCID9",
-      "timestamps": {
-        "start": 1659794271853,
-        "end": 1659794641444
-      },
-      "song": "Bad Intentions",
-      "artist": "AKKI (DE)",
-      "album_art_url": "https://i.scdn.co/image/ab67616d0000b27347982332cb8455010ccce750",
-      "album": "Bad Intentions"
+      "track_id": "2MrVp9x0HCzfzFL2pMmIdf",
+      "timestamps": { "start": 1660965805356, "end": 1660965980977 },
+      "song": "Primetime-Sexcrime",
+      "artist": "Earphones",
+      "album_art_url": "https://i.scdn.co/image/ab67616d0000b27303e4e2771f5b216aa63334d2",
+      "album": "Primetime-Sexcrime"
     },
     "listening_to_spotify": true,
     "kv": {},
@@ -18,66 +17,72 @@
       "id": "401390393746259978",
       "discriminator": "1111",
       "bot": false,
-      "avatar": "201e2754b9bc924631491cca7adf0e8f"
+      "avatar": "60d62d60335077c426d8c7e20999b968"
     },
     "discord_status": "dnd",
     "activities": [
       {
-        "type": 0,
-        "timestamps": {
-          "start": 1659794492000
+        "type": 4,
+        "state": "The world would be a better place without me, which is why I have to keep living",
+        "name": "Custom Status",
+        "id": "custom",
+        "emoji": {
+          "name": "cute_kitty_sip",
+          "id": "861448928598687764",
+          "animated": true
         },
-        "name": "GitHub",
-        "id": "f610e4579f5611e4",
-        "details": "Viewing the home page",
-        "created_at": 1659794495513,
-        "assets": {
-          "large_text": "PreMiD  v2.2.0 • Ext v2.2.3",
-          "large_image": "607911518234869760"
-        },
-        "application_id": "607587875122446359"
+        "created_at": 1660965635848
       },
       {
         "type": 2,
-        "timestamps": {
-          "start": 1659794271853,
-          "end": 1659794641444
-        },
-        "sync_id": "7hovQd7qhbCTyLnE1LCID9",
-        "state": "AKKI (DE)",
-        "session_id": "0ef29762d4eaa820a631bb8d51b8c618",
-        "party": {
-          "id": "spotify:401390393746259978"
-        },
+        "timestamps": { "start": 1660965805356, "end": 1660965980977 },
+        "sync_id": "2MrVp9x0HCzfzFL2pMmIdf",
+        "state": "Earphones",
+        "session_id": "7b72de65cd1ceed4d46c862f292aa0d8",
+        "party": { "id": "spotify:401390393746259978" },
         "name": "Spotify",
         "id": "spotify:1",
         "flags": 48,
-        "details": "Bad Intentions",
-        "created_at": 1659794302132,
+        "details": "Primetime-Sexcrime",
+        "created_at": 1660965843461,
         "assets": {
-          "large_text": "Bad Intentions",
-          "large_image": "spotify:ab67616d0000b27347982332cb8455010ccce750"
+          "large_text": "Primetime-Sexcrime",
+          "large_image": "spotify:ab67616d0000b27303e4e2771f5b216aa63334d2"
         }
       },
       {
         "type": 0,
-        "timestamps": {
-          "start": 1659781472799
+        "timestamps": { "start": 1660965401000 },
+        "state": "Peaky Blinders",
+        "session_id": "7b72de65cd1ceed4d46c862f292aa0d8",
+        "name": "Netflix",
+        "id": "8614bf0025999c1a",
+        "details": "Viewing series:",
+        "created_at": 1660965402400,
+        "buttons": ["View Series"],
+        "assets": {
+          "small_text": "Browsing...",
+          "small_image": "926541821079863316",
+          "large_text": "PreMiD  v2.2.0 • Ext v2.2.3",
+          "large_image": "mp:external/Ckg0VQ2v7havFlfZ9vHWD_iC_aGig-FoN7jAqEpLk5Q/%3Fr%3D777/https/occ-0-3565-1490.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABR_wminyo6Q-v9uLoz6tXx3E1uJYKx5-UMKsfJC6HU_uVw85kCMqt6Ky6XBbCOTLYdOidfOOMmuqPtR5AWmZIl7KqmCat742o0GAfmy4YDKRXLkxqEucf9F6kb1LkmRxXLRraw.jpg"
         },
-        "state": "Working on utils/discordData.ts:4:33",
-        "session_id": "0ef29762d4eaa820a631bb8d51b8c618",
+        "application_id": "926541425682829352"
+      },
+      {
+        "type": 0,
+        "timestamps": { "start": 1660965006493 },
+        "state": "Viewing dodzs.dev2/output.json",
+        "session_id": "7b72de65cd1ceed4d46c862f292aa0d8",
         "name": "Visual Studio Code",
-        "id": "f4681d9108fca568",
+        "id": "aecd2d0e350b0aa7",
         "details": "In dodzs.dev2 - 0 problems found",
-        "created_at": 1659794496150,
-        "buttons": [
-          "View Repository"
-        ],
+        "created_at": 1660965829215,
+        "buttons": ["View Repository"],
         "assets": {
           "small_text": "Visual Studio Code",
           "small_image": "mp:external/Joitre7BBxO-F2IaS7R300AaAcixAvPu3WD1YchRgdc/https/raw.githubusercontent.com/LeonardSSH/vscord/main/assets/icons/vscode.png",
-          "large_text": "Editing a TS file",
-          "large_image": "mp:external/ThZlJE1QK8kC3PSrVycZRD_WzkmIOqC9U200K-27eXU/https/raw.githubusercontent.com/LeonardSSH/vscord/main/assets/icons/ts.png"
+          "large_text": "Editing a JSON file",
+          "large_image": "mp:external/qzw3pMBofaFt9bvVnRXHtc2lVY2KmuochY9YBtzjRXU/https/raw.githubusercontent.com/LeonardSSH/vscord/main/assets/icons/json.png"
         },
         "application_id": "810516608442695700"
       }
@@ -86,3 +91,4 @@
     "active_on_discord_mobile": false,
     "active_on_discord_desktop": true
   }
+}
